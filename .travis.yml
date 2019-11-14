@@ -2,10 +2,17 @@
 services: docker
 
 before_install:
+  # Upgrade Docker.
   - sudo apt-get update
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 script:
-  - docker build -t docker_centos8_ansible .
-  - docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro docker_centos8_ansible
-  - docker exec --tty test-container env TERM=xterm ansible --version
+  # Test building Dockerfile.
+  - "travis_wait 20 sleep 1000 &" # increase timeout to 20 minutes
+  - docker build -t docker-ansible .
+
+  # Test running the container.
+  - docker run --name test-container -d --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro docker-ansible
+
+  # Verify Ansible is available in the container.
+  - docker exec -it test-container ansible --version
