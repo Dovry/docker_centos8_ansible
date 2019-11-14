@@ -18,7 +18,8 @@ rm -f /lib/systemd/system/anaconda.target.wants/*;
 RUN yum makecache --timer \
   && yum -y install \
     sudo \
-    wget 
+    wget \
+    which 
     
 # Install ansible
 RUN wget $script_url \
