@@ -10,7 +10,7 @@ RUN yum makecache --timer \
 # Install ansible
 RUN wget $script_url \
   && chmod +x ansible_convenience_script.sh \
-  && bash ./ansible_convenience_script.sh -p \
+  && sh ./ansible_convenience_script.sh -p \
   && rm -f ansible_convenience_script.sh \
   && yum clean all
 
