@@ -2,8 +2,8 @@ name: Basic build and push to Docker hub
 
 on: 
   push:
-    #branches:
-    #  - master
+    branches:
+      - master
   repository_dispatch:
 
 jobs:
