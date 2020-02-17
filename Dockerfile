@@ -8,8 +8,6 @@ RUN yum makecache --timer \
   && yum -y install wget \
   # Run ansible convenience script
   && wget --no-check-certificate -O - $script_url | bash -s -- -p \
-#  && chmod +x ansible_convenience_script.sh \
-#  && sh ./ansible_convenience_script.sh -p \
   && rm -f ansible_convenience_script.sh \
   && yum clean all
 
